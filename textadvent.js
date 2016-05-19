@@ -1,31 +1,26 @@
 
-var TextAdventPlayerInstance = function()
-{
-    return {
-        PlayerName: "",
-        ThePast: [],
-        QuestList: [],
-        Items: [],
-        Stats: [],
-        CurrentSituation: undefined
+class TextAdventPlayerClass {
+    constructor(PlayerName) {
+        this.PlayerName = PlayerName;
+        this.ThePast = [];
+        this.QuestList = [];
+        this.Items = [];
+        this.Stats = [];
+        this.CurrentSituation = undefined;
     }
-};
 
-var TextAdventClass =
-{
-    ShowNextStep: undefined,
-    RemoveItemFromEnvironment: undefined,
-    TakeItem: function(Player, Item) {
-        Player.Items[Player.Items.length] = Item;
+    TakeItem(Item) {
+        this.Items[this.Items.length] = Item;
 
-        this.RemoveItemFromEnvironment(Player, Item);
-    },
-    ChoosePath: function(Player, Situation, Path) {
-        Player.ThePast[Player.ThePast.length] = {
+        this.RemoveItemFromEnvironment(Item);
+    }
+
+    ChoosePath(Situation, Path) {
+        this.ThePast[this.ThePast.length] = {
             Situation: Situation,
             PathTaken: Path
         };
 
-        this.ShowNextStep(Player, Situation, Path);
+        this.ShowNextStep(Situation, Path);
     }
-};
+}

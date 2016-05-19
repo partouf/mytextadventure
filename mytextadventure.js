@@ -29,7 +29,7 @@ function DescribeRoom(Player, Situation)
             $Button.attr("value", "Take " + Item.Title);
             $Button.data("itemid", Item.Id);
             $Button.off("click").click(function() {
-                TextAdventClass.TakeItem(Player, $(this).data("itemid"));
+                Player.TakeItem($(this).data("itemid"));
             });
             $Items.append($Button);
         }
@@ -45,7 +45,7 @@ function DescribeRoom(Player, Situation)
             $Button.attr("value", Path.Title);
             $Button.data("pathroomid", Path.Room);
             $Button.off("click").click(function() {
-                TextAdventClass.ChoosePath(Player, Player.CurrentSituation, $(this).data("pathroomid"));
+                Player.ChoosePath(Player.CurrentSituation, $(this).data("pathroomid"));
             });
             $Paths.append($Button);
         }
@@ -69,36 +69,39 @@ function DescribeRoom(Player, Situation)
     }
 }
 
-function InitializeEngine()
+class MyTextAdventurePlayerClass extends TextAdventPlayerClass
 {
-    TextAdventClass.ShowNextStep = function(Player, Situation, Path) {
+    constructor(PlayerName) {
+        super(PlayerName);
+    }
+
+    ShowNextStep(Situation, Path) {
         if (Path === undefined)
         {
-            Player.CurrentSituation = Situation;
+            this.CurrentSituation = Situation;
         }
         else
         {
-            Player.CurrentSituation = MyRooms[Path];
+            this.CurrentSituation = MyRooms[Path];
         }
 
-        DescribeRoom(Player, Player.CurrentSituation);
-    };
+        DescribeRoom(this, this.CurrentSituation);
+    }
 
-    TextAdventClass.RemoveItemFromEnvironment = function(Player, ItemId) {
-        var idx = Player.CurrentSituation.Items.indexOf(ItemId);
-        Player.CurrentSituation.Items.splice(idx, 1);
+    RemoveItemFromEnvironment(ItemId) {
+        var idx = this.CurrentSituation.Items.indexOf(ItemId);
+        this.CurrentSituation.Items.splice(idx, 1);
 
         var ItemObj = GetItemById(ItemId);
-        console.log(Player.PlayerName + " just picked up " + ItemObj.Title);
+        console.log(this.PlayerName + " just picked up " + ItemObj.Title);
 
-        DescribeRoom(Player, Player.CurrentSituation);
-    };
+        DescribeRoom(this, this.CurrentSituation);
+    }
 }
 
 function NewPlayer(PlayerName)
 {
-    var NewPlayer = TextAdventPlayerInstance();
-    NewPlayer.PlayerName = PlayerName;
+    var NewPlayer = new MyTextAdventurePlayerClass(PlayerName);
     NewPlayer.CurrentSituation = MyRooms[0];
 
     PlayersInRooms[PlayersInRooms.length] = NewPlayer;
@@ -122,9 +125,8 @@ function GetItemById(Id)
 var CurrentPlayer = undefined;
 
 $(document).ready(function() {
-    InitializeEngine();
-
     CurrentPlayer = NewPlayer("Player1");
+    console.log(CurrentPlayer);
 
-    TextAdventClass.ShowNextStep(CurrentPlayer, CurrentPlayer.CurrentSituation, undefined);
+    CurrentPlayer.ShowNextStep(CurrentPlayer.CurrentSituation, undefined);
 });
