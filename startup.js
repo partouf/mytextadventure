@@ -1,15 +1,13 @@
 
 $(document).ready(function() {
-    var PlayersInRooms = [];
-
     var ItemUtils = new ItemUtilsClass();
-    var UI = new MyTextAdventUIClass(ItemUtils);
+    var RoomUtils = new RoomUtilsClass();
+    var UI = new MyTextAdventUIClass(ItemUtils, RoomUtils);
 
-    var CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, UI);
-    CurrentPlayer.CurrentSituation = MyRooms[0];
-    PlayersInRooms[PlayersInRooms.length] = CurrentPlayer;
+    var CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, RoomUtils, UI);
 
-    console.log(CurrentPlayer);
+    UI.Debug(CurrentPlayer);
+    UI.Info("Hello, World!");
 
-    CurrentPlayer.ShowNextStep(CurrentPlayer.CurrentSituation, undefined);
+    CurrentPlayer.ChoosePath(undefined, 0);
 });

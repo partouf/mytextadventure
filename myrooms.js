@@ -10,7 +10,7 @@ var MyRooms = [
         Paths: [
             {Room: 1, Title: "Go up to your room"},
             {Room: 3, Title: "Go outside"}
-        ],
+        ]
     },
     {
         Id: 1,
@@ -45,9 +45,77 @@ var MyRooms = [
         Items: [],
         Paths: [
             {Room: 0, Title: "Go inside"},
-            {Room: 2, Title: "Head out"}
+            {Room: 4, Title: "Head out"}
         ],
         Entry: function(Player) {
         }
+    },
+    {
+        Id: 4,
+        Title: "The publical display of boozery",
+        Description:
+            "It seems you found yourself in front of a pub. Coincidentally you feel quite thirsty to drink yourself into oblivion.",
+        Items: [],
+        Paths: [
+            {Room: 5, Title: "Go inside"},
+            {Room: 2, Title: "Resist, Keep walking"}
+        ]
+    },
+    {
+        Id: 5,
+        Title: "The smell of happiness",
+        Description: "",
+        Items: [],
+        Paths: [
+            {Room: 5.1, Title: "Order a beer"}
+        ],
+        Entry: function(Player) {
+            if (Player.HasItem(4)) {
+                this.Description = "An angry bartender looks at you and immediately shouts: 'HEY YOU, GIVE ME THAT REMOTE!'";
+                this.Paths = [{Room: 2, Title: "Run out as fast as you can"}];
+            } else {
+                this.Description = "A bartender looks grumpy and distracted, but seems ready to take your order nonetheless.";
+                this.Paths = [{Room: 5.1, Title: "Order a beer"}];
+            }
+        },
+        UseItem: function(Player, ItemId, UI) {
+            if (ItemId == 4) {
+                UI.Info("Well done.");
+                Player.EarnPoints(1);
+
+                return 5
+            } else {
+                UI.Info("So yeah, you shouldn't have done that.");
+
+                return 2;
+            }
+        }
+    },
+    {
+        Id: 5.1,
+        Title: "The stank of reality",
+        Description: "You order a beer, pay up, and gulp away the watery liquid within a few seconds.",
+        Paths: [
+            {Room: 5.1, Title: "Order another beer"},
+            {Room: 4, Title: "Force yourself to the exit"}
+        ]
     }
 ];
+
+class RoomUtilsClass {
+    constructor() {
+    }
+
+    GetRoomById(Id)
+    {
+        for (var ItemIdx in MyRooms)
+        {
+            if (MyRooms[ItemIdx].Id === Id)
+            {
+                return MyRooms[ItemIdx];
+            }
+        }
+
+        return undefined;
+    }
+}

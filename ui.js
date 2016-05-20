@@ -10,6 +10,7 @@ class MyTextAdventUIClass {
         this.$Title = $("#title");
         this.$Description = $("#description");
         this.$ViewPort = $("#viewport");
+        this.$InfoPopup = $("#infopopup");
     }
 
     ClearAll() {
@@ -18,6 +19,7 @@ class MyTextAdventUIClass {
         this.$Inventory.html("");
         this.$PlayerStats.html("");
         this.$Title.html("");
+        //this.$InfoPopup.html(""); // popup has its own timer to show/hide
 
         this.$ViewPort.css("background-image", "");
         this.$ViewPort.css("background-repeat", "no-repeat");
@@ -83,11 +85,15 @@ class MyTextAdventUIClass {
     }
 
     DisplayPlayerStats(Player) {
-        var $PlayerName = $("<label for='playername' /><span name='playername' />");
-        $PlayerName.closest("label").html("Name: ");
-        $PlayerName.closest("span").html(Player.PlayerName);
-
+        var $PlayerName = $("<div class='stat'><label for='playername' /><span id='playername' /></div>");
+        $PlayerName.find("label").html("Name: ");
+        $PlayerName.find("span").html(Player.PlayerName);
         this.$PlayerStats.append($PlayerName);
+
+        var $PlayerScore = $("<div class='stat'><label for='playerscore' /><span id='playerscore' /></div>");
+        $PlayerScore.find("label").html("Score: ");
+        $PlayerScore.find("span").html(Player.Stats["Score"]);
+        this.$PlayerStats.append($PlayerScore);
     }
 
     Paint(Situation) {
@@ -102,8 +108,25 @@ class MyTextAdventUIClass {
 
         if (Situation.Description !== undefined) {
             this.$Description.html(Situation.Description);
-            this.$Description.slideDown();
+
+            if (Player.HasBeenOnPath(Situation.Id)) {
+                this.$Description.show();
+            } else {
+                this.$Description.slideDown();
+            }
         }
+    }
+
+    Info(Stuff) {
+        var self = this;
+
+        this.Debug(Stuff);
+
+        this.$InfoPopup.hide();
+        this.$InfoPopup.html(Stuff);
+        this.$InfoPopup.fadeIn(1000, "", function() {
+            self.$InfoPopup.fadeOut(1000);
+        });
     }
 
     Debug(Stuff) {

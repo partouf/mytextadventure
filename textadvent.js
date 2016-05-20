@@ -16,12 +16,12 @@ class TextAdventPlayerClass {
     }
 
     ChoosePath(Situation, Path) {
+        this.FollowPath(Situation, Path);
+
         this.ThePast[this.ThePast.length] = {
             Situation: Situation,
             PathTaken: Path
         };
-
-        this.ShowNextStep(Situation, Path);
     }
 
     HasBeenOnPath(Path)

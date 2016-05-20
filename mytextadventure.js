@@ -1,21 +1,17 @@
 
 class MyTextAdventurePlayerClass extends TextAdventPlayerClass
 {
-    constructor(PlayerName, ItemUtils, UI) {
+    constructor(PlayerName, ItemUtils, RoomUtils, UI) {
         super(PlayerName);
         this.ItemUtils = ItemUtils;
+        this.RoomUtils = RoomUtils;
         this.UI = UI;
+
+        this.Stats["Score"] = 0;
     }
 
-    ShowNextStep(Situation, Path) {
-        if (Path === undefined)
-        {
-            this.CurrentSituation = Situation;
-        }
-        else
-        {
-            this.CurrentSituation = MyRooms[Path];
-        }
+    FollowPath(Situation, Path) {
+        this.CurrentSituation = this.RoomUtils.GetRoomById(Path);
 
         this.UI.DescribeRoom(this, this.CurrentSituation);
     }
@@ -36,11 +32,28 @@ class MyTextAdventurePlayerClass extends TextAdventPlayerClass
     }
     
     UseItem(ItemId) {
-        this.UI.Debug("You can't use that (" + ItemId + "), but the item disappears into thin air either way.");
+        if (this.CurrentSituation.UseItem !== undefined)
+        {
+            var NewRoomId = this.CurrentSituation.UseItem(this, ItemId, this.UI);
+            this.RemoveItemFromInventory(ItemId);
+            this.FollowPath(this.CurrentSituation, NewRoomId);
+        }
+        else
+        {
+            this.UI.Debug("You can't use that (" + ItemId + "), but the item disappears into thin air either way.");
+            this.RemoveItemFromInventory(ItemId);
+            this.UI.DescribeRoom(this, this.CurrentSituation);
+        }
+    }
 
-        this.RemoveItemFromInventory(ItemId);
+    HasItem(ItemId) {
+        var idx = this.Items.indexOf(ItemId);
+        return (idx >= 0);
+    }
 
-        this.UI.DescribeRoom(this, this.CurrentSituation);
+    EarnPoints(NumberOfPoints) {
+        this.Stats["Score"] += NumberOfPoints;
+        this.UI.Debug("You earned " + NumberOfPoints + " points");
     }
     
     Die() {
