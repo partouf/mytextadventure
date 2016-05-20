@@ -23,4 +23,14 @@ class TextAdventPlayerClass {
 
         this.ShowNextStep(Situation, Path);
     }
+
+    HasBeenOnPath(Path)
+    {
+        for (var PastPathIdx in this.ThePast) {
+            if (this.ThePast[PastPathIdx].PathTaken === Path)
+                return true;
+        }
+
+        return false;
+    }
 }

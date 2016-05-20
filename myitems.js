@@ -6,3 +6,21 @@ var MyItems = [
     {Id: 3, Title: "Yellow Pokeball"},
     {Id: 4, Title: "Remote control"}
 ];
+
+class ItemUtilsClass {
+    constructor() {
+    }
+
+    GetItemById(Id)
+    {
+        for (var ItemIdx in MyItems)
+        {
+            if (MyItems[ItemIdx].Id === Id)
+            {
+                return MyItems[ItemIdx];
+            }
+        }
+
+        return undefined;
+    }
+}

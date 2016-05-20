@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+    <link rel="stylesheet" type="text/css" href="resources/ui.css" />
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="textadvent.js"></script>
     <script src="myitems.js"></script>
     <script src="myrooms.js"></script>
+    <script src="ui.js"></script>
     <script src="mytextadventure.js"></script>
+    <script src="startup.js"></script>
 </head>
 <body>
-    <div id="title"></div>
-    <hr />
-    <div>Visible items</div>
-    <div id="items"></div>
-    <hr />
-    <div>Paths to take</div>
-    <div id="paths"></div>
-    <hr />
-    <div>Inventory</div>
-    <div id="inventory"></div>
+    <div id="content">
+        <div id="viewport">
+            <div id="title"></div>
+            <div id="description"></div>
+        </div>
+
+        <div id="right">
+            <div>Player stats</div>
+            <div id="playerstats"></div>
+        </div>
+
+        <div class="clear" />
+
+        <div id="bottom">
+            <div id="items"></div>
+            <div id="paths"></div>
+            <div id="inventory"></div>
+        </div>
+    </div>
 </body>
 </html>
