@@ -11,6 +11,7 @@ class MyTextAdventUIClass {
         this.$Description = $("#description");
         this.$ViewPort = $("#viewport");
         this.$InfoPopup = $("#infopopup");
+        this.InfoPopupTimer = 0;
     }
 
     ClearAll() {
@@ -122,10 +123,17 @@ class MyTextAdventUIClass {
 
         this.Debug(Stuff);
 
+        if (this.InfoPopupTimer != 0) {
+            clearTimeout(this.InfoPopupTimer);
+            this.InfoPopupTimer = 0;
+        }
+
         this.$InfoPopup.hide();
         this.$InfoPopup.html(Stuff);
         this.$InfoPopup.fadeIn(1000, "", function() {
-            self.$InfoPopup.fadeOut(1000);
+            this.InfoPopupTimer = setTimeout(function() {
+                self.$InfoPopup.fadeOut(1000);
+            }, 5000);
         });
     }
 
