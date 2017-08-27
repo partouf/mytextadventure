@@ -1,13 +1,18 @@
 
 $(document).ready(function() {
+
+    var UI = false;
+    var CurrentPlayer = false;
+
     var ItemUtils = new ItemUtilsClass();
-    var RoomUtils = new RoomUtilsClass();
-    var UI = new MyTextAdventUIClass(ItemUtils, RoomUtils);
+    var RoomUtils = new RoomUtilsClass(function() {
+        UI = new MyTextAdventUIClass(ItemUtils, RoomUtils);
 
-    var CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, RoomUtils, UI);
+        CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, RoomUtils, UI);
 
-    UI.Debug(CurrentPlayer);
-    UI.Info("Hello, World!");
+        UI.Debug(CurrentPlayer);
+        UI.Info("Hello, World!");
 
-    CurrentPlayer.ChoosePath(undefined, 0);
+        CurrentPlayer.ChoosePath(undefined, 0);
+    });
 });
