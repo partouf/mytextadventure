@@ -1,69 +1,113 @@
 [
     {
+        "Description": [
+            "The interior pretty much resembles a crazy Pokemon(tm) laboratory.",
+            "There are even three choices of Pokeballs to start your journey with.",
+            "It's unlikely that there are actual Pokemon inside, but they're very decorative."
+        ],
         "Id": 0,
-        "Title": "Your house",
-        "Description": ["The interior pretty much resembles a crazy Pokemon(tm) laboratory.",
-                        "There are even three choices of Pokeballs to start your journey with.",
-                        "It's unlikely that there are actual Pokemon inside, but they're very decorative."],
-        "Items": [1,2,3],
+        "Items": [
+            1,
+            2,
+            3
+        ],
         "Paths": [
-            {"Room": 1, "Title": "Go up to your room"},
-            {"Room": 3, "Title": "Go outside"}
-        ]
+            {
+                "Room": 1,
+                "Title": "Go up to your room"
+            },
+            {
+                "Room": 3,
+                "Title": "Go outside"
+            }
+        ],
+        "Title": "Your house"
     },
     {
-        "Id": 1,
-        "Title": "Your bedroom",
         "Description": "There's no bed here. Not even a TV. So why exactly is a Remote control lying on the floor?",
-        "Items": [4],
+        "Id": 1,
+        "Items": [
+            4
+        ],
         "Paths": [
-            {"Room": 0, "Title": "Go downstairs"}
-        ]
+            {
+                "Room": 0,
+                "Title": "Go downstairs"
+            }
+        ],
+        "Title": "Your bedroom"
     },
     {
-        "Id": 2,
-        "Title": "Graveyard",
         "Description": "You instantly died, that's what happens when you wander off. Next time stay in bed. Oh wait, you don't have a bed.",
-        "Items": [],
-        "BackgroundImage": "graveyard"
+        "Id": 2,
+        "Items": [
+        ],
+        "Paths": [
+        ],
+        "Title": "Graveyard"
     },
     {
-        "Id": 3,
-        "Title": "In front of your house",
         "Description": "You're in front of the house you grew up in. The town is never ending in its disappointment. Surely there's more to explore?",
-        "Items": [],
+        "Id": 3,
+        "Items": [
+        ],
         "Paths": [
-            {"Room": 0, "Title": "Go inside"},
-            {"Room": 4, "Title": "Head out"}
-        ]
+            {
+                "Room": 0,
+                "Title": "Go inside"
+            },
+            {
+                "Room": 4,
+                "Title": "Head out"
+            }
+        ],
+        "Title": "In front of your house"
     },
     {
+        "Description": "It seems you found yourself in front of a pub. Coincidentally you feel quite thirsty to drink yourself into oblivion.",
         "Id": 4,
-        "Title": "The publical display of boozery",
-        "Description":
-            "It seems you found yourself in front of a pub. Coincidentally you feel quite thirsty to drink yourself into oblivion.",
-        "Items": [],
+        "Items": [
+        ],
         "Paths": [
-            {"Room": 5, "Title": "Go inside"},
-            {"Room": 2, "Title": "Resist, Keep walking"}
-        ]
+            {
+                "Room": 5,
+                "Title": "Go inside"
+            },
+            {
+                "Room": 2,
+                "Title": "Resist, Keep walking"
+            }
+        ],
+        "Title": "The publical display of boozery"
     },
     {
-        "Id": 5,
-        "Title": "The smell of happiness",
         "Description": "",
-        "Items": [],
+        "Id": 5,
+        "Items": [
+        ],
         "Paths": [
-            {"Room": 5.1, "Title": "Order a beer"}
-        ]
+            {
+                "Room": 5.1,
+                "Title": "Order a beer"
+            }
+        ],
+        "Title": "The smell of happiness"
     },
     {
-        "Id": 5.1,
-        "Title": "The stank of reality",
         "Description": "You order a beer, pay up, and gulp away the watery liquid within a few seconds.",
+        "Id": 5.1,
+        "Items": [
+        ],
         "Paths": [
-            {"Room": 5.1, "Title": "Order another beer"},
-            {"Room": 4, "Title": "Force yourself to the exit"}
-        ]
+            {
+                "Room": 5.1,
+                "Title": "Order another beer"
+            },
+            {
+                "Room": 4,
+                "Title": "Force yourself to the exit"
+            }
+        ],
+        "Title": "The stank of reality"
     }
 ]
