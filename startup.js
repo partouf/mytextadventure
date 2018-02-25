@@ -4,15 +4,19 @@ $(document).ready(function() {
     var UI = false;
     var CurrentPlayer = false;
 
-    var ItemUtils = new ItemUtilsClass();
-    var RoomUtils = new RoomUtilsClass(function() {
-        UI = new MyTextAdventUIClass(ItemUtils, RoomUtils);
+    var RoomUtils = false;
+    var ItemUtils = false;
 
-        CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, RoomUtils, UI);
+    ItemUtils = new ItemUtilsClass(function() {
+        RoomUtils = new RoomUtilsClass(function() {
+            UI = new MyTextAdventUIClass(ItemUtils, RoomUtils);
 
-        UI.Debug(CurrentPlayer);
-        UI.Info("Hello, World!");
+            CurrentPlayer = new MyTextAdventurePlayerClass("Ash", ItemUtils, RoomUtils, UI);
 
-        CurrentPlayer.ChoosePath(undefined, 0);
+            UI.Debug(CurrentPlayer);
+            UI.Info("Hello, World!");
+
+            CurrentPlayer.ChoosePath(undefined, 0);
+        });
     });
 });
