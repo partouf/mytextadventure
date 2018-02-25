@@ -1,14 +1,20 @@
 
-var MyItems = [
-    {Id: 0, Title: "Invisible"},
-    {Id: 1, Title: "Red Pokeball"},
-    {Id: 2, Title: "Blue Pokeball"},
-    {Id: 3, Title: "Yellow Pokeball"},
-    {Id: 4, Title: "Remote control"}
-];
+var MyItems = [];
 
 class ItemUtilsClass {
-    constructor() {
+    constructor(doneLoading) {
+        var self = this;
+
+        $.ajax({
+            dataType: "json",
+            url: "myitems.json",
+            data: {},
+            success: function (json) {
+                MyItems = json;
+
+                doneLoading();
+            }
+        });
     }
 
     GetItemById(Id)
